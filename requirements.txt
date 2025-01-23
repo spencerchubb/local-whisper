@@ -1,0 +1,6 @@
+sounddevice
+scipy
+numpy
+pyautogui
+keyboard
+requests
