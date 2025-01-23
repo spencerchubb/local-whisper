@@ -4,8 +4,9 @@ This script lets you do voice-to-text. It runs locally, it's free, and it's fast
 
 It's easy to use:
 1. Click on a text field that you want to write in
-2. Press the hotkey (ctrl+shift+r)
+2. Press hotkey to start (ctrl+shift+r)
 3. Say stuff
+4. Press hotkey again to stop
 
 It's great for coding and writing! The average person speaks ~160 words per minute, so speaking is faster than typing unless you're a god-tier typist.
 
