@@ -10,21 +10,11 @@ It's easy to use:
 
 It's great for coding and writing! The average person speaks ~160 words per minute, so speaking is faster than typing unless you're a god-tier typist.
 
-## How to setup
-
-Download one of the llamafiles. I recommend [whisper-tiny.en.llamafile](https://huggingface.co/Mozilla/whisperfile/blob/main/whisper-tiny.en.llamafile) to get responses in less than a second.
-
-Larger models are more accurate, but slower. You can also use a GPU, but it's a little more work to setup. See the llamafile docs for more info.
-
-After downloading, run the llamafile server by simply running the file:
-
-```
-./whisper-tiny.en.llamafile
-```
-
-Then open a second terminal and run the python script:
+## How to run
 
 ```
 pip install -r requirements.txt
 python main.py
 ```
+
+If you want, you can configure some variables in `main.py`. For example, by default it uses the tiny whisper model. You can use a bigger model to get more accuracy, but it'll be slower.

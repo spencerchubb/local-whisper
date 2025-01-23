@@ -1,2 +1,2 @@
-whisper-small.en.llamafile
-whisper-tiny.en.llamafile
+models/
+venv/

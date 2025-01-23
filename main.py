@@ -6,11 +6,17 @@ import tempfile
 import time
 import pyautogui
 import keyboard
+import os
 
+BASE_URL = 'https://huggingface.co/Mozilla/whisperfile/resolve/main'
+LLAMAFILE = 'whisper-tiny.en.llamafile' # tiny, small, medium
+HOTKEY = 'ctrl+shift+r'
 SAMPLE_RATE = 44100
+MAX_SECONDS = 60
+
 def record_audio(channels=2):
     audio_data = sd.rec(
-        int(SAMPLE_RATE * 60), # Record up to 1 minut
+        int(SAMPLE_RATE * MAX_SECONDS),
         samplerate=SAMPLE_RATE,
         channels=channels,
         blocking=False,
@@ -66,7 +72,6 @@ def start_or_stop():
                 # For good measure
                 text = text.strip()
                 
-
                 print("Transcription:", text)
                 pyautogui.write(text)
         except Exception as e:
@@ -75,14 +80,24 @@ def start_or_stop():
 
 
 def main():
-    hotkey = 'ctrl+shift+r'
-    print(f"Press {hotkey} to start and stop recording")
+    print(f"Press {HOTKEY} to start and stop recording")
+    keyboard.add_hotkey(HOTKEY, start_or_stop)
 
-    # Hot key to start listening (e.g., Press F2 to start)
-    keyboard.add_hotkey(hotkey, start_or_stop)
+    # Make models directory
+    os.makedirs('models', exist_ok=True)
 
-    # Keep the program running
-    keyboard.wait()
+    # Download llamafile if it doesn't exist
+    if not os.path.exists(f'models/{LLAMAFILE}'):
+        print(f"Downloading {LLAMAFILE}...")
+        response = requests.get(f'{BASE_URL}/{LLAMAFILE}')
+        with open(f'models/{LLAMAFILE}', 'wb') as file:
+            file.write(response.content)
+        print(f"Downloaded {LLAMAFILE}!")
+    else:
+        print(f"Using {LLAMAFILE}")
+    
+    # Run the llamafile server
+    os.system(f'cd models && {LLAMAFILE}')
     
 if __name__ == "__main__":
     try:
